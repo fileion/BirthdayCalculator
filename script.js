@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const timezoneSelect = document.getElementById("timezoneSelect");
 
     function populateDays(year, month) {
-        daySelect.innerHTML = '';
+        
         const daysInMonth = new Date(year, month, 0).getDate();
         for (let i = 1; i <= daysInMonth; i++) {
             daySelect.add(new Option(i, i));
@@ -123,8 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
             months--;
         }
 
-        const displayHours = now.getHours() - birthDate.getHours();
-        const displayMinutes = now.getMinutes() - birthDate.getMinutes();
+        let displayHours = now.getHours() - birthDate.getHours();
+        let displayMinutes = now.getMinutes() - birthDate.getMinutes();
 
         if (displayMinutes < 0) {
             displayMinutes += 60;
