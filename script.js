@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const hourSelect = document.getElementById("hourSelect");
     const minuteSelect = document.getElementById("minuteSelect");
     const timezoneSelect = document.getElementById("timezoneSelect");
-
+    const currentYear = new Date().getFullYear();
     function populateDays(year, month) {
         
         const daysInMonth = new Date(year, month, 0).getDate();
@@ -27,8 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
         monthSelect.add(new Option(month, index + 1));
     });
 
-    for (let i = 1900; i <= new Date().getFullYear(); i++) {
-        yearSelect.add(new Option(i, i));
+    for (let i = 1900; i <= currentYear; i++) {
+        const option = new Option(i, i);
+        yearSelect.add(option);
+        if (i === currentYear) {
+            yearSelect.value = i; 
+        }
     }
 
     for (let i = 1; i <= 12; i++) {
