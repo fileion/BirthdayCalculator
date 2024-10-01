@@ -101,7 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const minute = parseInt(minuteSelect.value);
         const ampm = document.getElementById("ampmSelect").value;
 
-        if (!day || !month || !year) return;
+        if (!day || !month || !year) {
+            alert("Please select a valid date.");
+            return;
+        };
 
         const birthDate = new Date(year, month, day, ampm === 'pm' && hour !== 12 ? hour + 12 : hour, minute);
         const toDate = new Date(toYearSelect.value, toMonthSelect.value, toDaySelect.value);
