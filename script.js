@@ -101,7 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const minute = parseInt(minuteSelect.value);
         const ampm = document.getElementById("ampmSelect").value;
 
-        if (!day || !month || !year) {
+
+        if (!day || isNaN(month) || !year) {
             alert("Please select a valid date.");
             return;
         };

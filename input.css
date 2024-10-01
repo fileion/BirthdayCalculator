@@ -31,7 +31,7 @@
 }
 
 .fi-form-select{
-    @apply p-2 border rounded-md
+    @apply p-2 border rounded-md invalid:text-red-600 valid:text-green-500
 }
 
 .form-label{
