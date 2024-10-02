@@ -31,16 +31,16 @@
 }
 
 .fi-form-select{
-    @apply p-2 border rounded-md invalid:text-red-600 valid:text-green-500
+    @apply p-2 border rounded-md invalid:text-gray-400 valid:text-gray-800
 }
 
 .form-label{
     @apply block text-gray-700 font-medium mb-1
 }
 
-
-
-
+option{
+    @apply text-black
+}
 
 
 

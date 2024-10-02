@@ -691,12 +691,27 @@ video {
   padding: 0.5rem;
 }
 
+.fi-form-select:valid {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.fi-form-select:invalid {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 .form-label {
   margin-bottom: 0.25rem;
   display: block;
   font-weight: 500;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+option {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 /* From Main CSS File */
