@@ -4,8 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const yearSelect = document.getElementById("yearSelect");
     const hourSelect = document.getElementById("hourSelect");
     const minuteSelect = document.getElementById("minuteSelect");
-    const timezoneSelect = document.getElementById("timezoneSelect");
     const currentYear = new Date().getFullYear();
+
+    const toDaySelect = document.getElementById("toDaySelect");
+    const toMonthSelect = document.getElementById("toMonthSelect");
+    const toYearSelect = document.getElementById("toYearSelect");
     function populateDays(year, month) {
         
         const daysInMonth = new Date(year, month, 0).getDate();
@@ -14,8 +17,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function populateToDays(year, month) {
+        
+        const daysInMonth = new Date(year, month, 0).getDate();
+        for (let i = 1; i <= daysInMonth; i++) {
+            toDaySelect.add(new Option(i, i));
+        }
+    }
+
     for (let i = 1; i <= 31; i++) {
         daySelect.add(new Option(i, i));
+
+        const currentDate = new Date().getDate() === i ? true : false;
+        toDaySelect.add(new Option(i, i, '', currentDate));
     }
 
     const months = [
@@ -24,7 +38,11 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     months.forEach((month, index) => {
-        monthSelect.add(new Option(month, index + 1));
+        monthSelect.add(new Option(month, index));
+
+        const currentMonth = new Date().getMonth() === index ? true : false;
+
+        toMonthSelect.add(new Option(month, index, '', currentMonth));
     });
 
     for (let i = 1900; i <= currentYear; i++) {
@@ -32,6 +50,14 @@ document.addEventListener("DOMContentLoaded", function () {
         yearSelect.add(option);
         if (i === currentYear) {
             yearSelect.value = i; 
+        }
+    }
+
+    for (let i = 1900; i <= currentYear + 1000; i++) {
+        const option = new Option(i, i);
+        toYearSelect.add(option);
+        if (i === currentYear) {
+            toYearSelect.value = i;
         }
     }
 
@@ -43,38 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
         minuteSelect.add(new Option(i < 10 ? '0' + i : i, i));
     }
 
-    const timezones = [
-        { value: "UTC-12:00", text: "(UTC-12:00) Baker Island Time" },
-        { value: "UTC-11:00", text: "(UTC-11:00) Samoa Standard Time" },
-        { value: "UTC-10:00", text: "(UTC-10:00) Hawaii-Aleutian Standard Time" },
-        { value: "UTC-09:00", text: "(UTC-09:00) Alaska Standard Time" },
-        { value: "UTC-08:00", text: "(UTC-08:00) Pacific Standard Time" },
-        { value: "UTC-07:00", text: "(UTC-07:00) Mountain Standard Time" },
-        { value: "UTC-06:00", text: "(UTC-06:00) Central Standard Time" },
-        { value: "UTC-05:00", text: "(UTC-05:00) Eastern Standard Time" },
-        { value: "UTC-04:00", text: "(UTC-04:00) Atlantic Standard Time" },
-        { value: "UTC-03:00", text: "(UTC-03:00) Argentina Time" },
-        { value: "UTC-02:00", text: "(UTC-02:00) South Georgia Time" },
-        { value: "UTC-01:00", text: "(UTC-01:00) Azores Time" },
-        { value: "UTC±00:00", text: "(UTC±00:00) Greenwich Mean Time" },
-        { value: "UTC+01:00", text: "(UTC+01:00) Central European Time" },
-        { value: "UTC+02:00", text: "(UTC+02:00) Eastern European Time" },
-        { value: "UTC+03:00", text: "(UTC+03:00) Moscow Time" },
-        { value: "UTC+04:00", text: "(UTC+04:00) Gulf Standard Time" },
-        { value: "UTC+05:00", text: "(UTC+05:00) Pakistan Standard Time" },
-        { value: "UTC+06:00", text: "(UTC+06:00) Bangladesh Standard Time" },
-        { value: "UTC+07:00", text: "(UTC+07:00) Indochina Time" },
-        { value: "UTC+08:00", text: "(UTC+08:00) China Standard Time" },
-        { value: "UTC+09:00", text: "(UTC+09:00) Japan Standard Time" },
-        { value: "UTC+10:00", text: "(UTC+10:00) Australian Eastern Standard Time" },
-        { value: "UTC+11:00", text: "(UTC+11:00) Solomon Islands Time" },
-        { value: "UTC+12:00", text: "(UTC+12:00) Fiji Time" }
-    ];
-
-    timezones.forEach(tz => {
-        timezoneSelect.add(new Option(tz.text, tz.value));
-    });
-
     monthSelect.addEventListener("change", function () {
         const year = parseInt(yearSelect.value);
         const month = parseInt(monthSelect.value);
@@ -83,11 +77,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    yearSelect.addEventListener("change", function () {
-        const year = parseInt(yearSelect.value);
-        const month = parseInt(monthSelect.value);
+    toMonthSelect.addEventListener("change", function () {
+        const year = parseInt(toYearSelect.value);
+        const month = parseInt(toMonthSelect.value);
         if (year && month) {
-            populateDays(year, month);
+            populateToDays(year, month);
+        }
+    });
+
+    toYearSelect.addEventListener("change", function () {
+        const year = parseInt(toYearSelect.value);
+        const month = parseInt(toMonthSelect.value);
+        if (year && month) {
+            populateToDays(year, month);
         }
     });
 
@@ -98,22 +100,25 @@ document.addEventListener("DOMContentLoaded", function () {
         const hour = parseInt(hourSelect.value);
         const minute = parseInt(minuteSelect.value);
         const ampm = document.getElementById("ampmSelect").value;
-        const timezone = document.getElementById("timezoneSelect").value;
 
-        if (!day || !month || !year) return;
 
-        const birthDate = new Date(year, month - 1, day, ampm === 'pm' && hour !== 12 ? hour + 12 : hour, minute);
+        if (!day || isNaN(month) || !year) {
+            alert("Please select a valid date.");
+            return;
+        };
+
+        const birthDate = new Date(year, month, day, ampm === 'pm' && hour !== 12 ? hour + 12 : hour, minute);
+        const toDate = new Date(toYearSelect.value, toMonthSelect.value, toDaySelect.value);
         const now = new Date();
-        const timezoneOffset = parseInt(timezone.split(':')[1]) * 60;
 
-        now.setMinutes(now.getMinutes() + now.getTimezoneOffset() - timezoneOffset);
+        now.setMinutes(now.getMinutes() + now.getTimezoneOffset() - minuteSelect.value * 60);
 
         // Calculate age
-        let age = now - birthDate;
+        let age = toDate - birthDate;
         const totalDays = Math.floor(age / (1000 * 60 * 60 * 24));
-        let years = now.getFullYear() - birthDate.getFullYear();
-        let months = now.getMonth() - birthDate.getMonth();
-        let days = (now.getDate() - birthDate.getDate());
+        let years = toDate.getFullYear() - birthDate.getFullYear();
+        let months = toDate.getMonth() - birthDate.getMonth();
+        let days = (toDate.getDate() - birthDate.getDate());
         
         
         if (months < 0) {

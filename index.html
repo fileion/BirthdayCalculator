@@ -4,81 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Calculator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="bg-gray-100 flex items-center justify-center min-h-screen">
-        <div class="bg-white shadow-lg rounded-lg p-6 md:p-8 max-w-3xl mx-auto w-full">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              
-              <div class="bg-blue-50 border border-purple-400 p-4 rounded-lg">
-                <p class="text-xl md:text-2xl font-bold mb-4">Your age is</p>
-                <p class="text-blue-600 text-lg md:text-xl font-semibold" id="age">22 years 11 months 3 days</p>
-                <p class="text-blue-600 text-lg md:text-xl font-semibold" id="time">18 hours and 10 minutes</p>
-                <p class="text-gray-700 font-bold text-sm mt-4" >You were born in</p>
-                <p class="text-blue-600 text-lg md:text-xl font-semibold" id="date">1:30am on Saturday 1st January 2000</p>
-                <p class="text-gray-700 font-bold text-sm mt-4">Next Birthday in</p>
-                <p class="text-blue-600 text-lg md:text-xl font-semibold" id="birthday">27 days 5 hours and 49 minutes</p>
-                <p class="text-gray-700 font-bold text-sm mt-4">Your age is total</p>
-                <p class="text-blue-600 text-lg md:text-xl font-semibold" id="total">8,374 days</p>
-              </div>
-        
-              
-              <div class="bg-white p-4 rounded-lg border border-gray-200">
-                <div class="mb-4">
-                  <label class="block text-gray-700 font-medium mb-1">Birthday</label>
-                  <div class="grid grid-cols-3 gap-2">
-                    <select class="form-select p-2 border rounded-md" aria-label="Day" id="daySelect">
-                      <!-- Days -->
-                      <option value="1" selected>Day</option>
-                     
-                    </select>
-                    <select class="form-select p-2 border rounded-md" aria-label="Month" id="monthSelect">
-                      <!-- Months -->
-                      <option value="January" selected>Month</option>
-                     
-                    </select>
-                    <select class="form-select p-2 border rounded-md" aria-label="Year" id="yearSelect">
-                      <!-- Years -->
-                      <option value="2000" selected>Year</option>
-                     
-                    </select>
-                  </div>
-                </div>
-        
-                <div class="mb-4">
-                  <label class="block text-gray-700 font-medium mb-1">Birth Time (optional)</label>
-                  <div class="grid grid-cols-3 gap-2">
-                    <select class="form-select p-2 border rounded-md" aria-label="Hour" id="hourSelect">
-                      <!-- Hours -->
-                      <option value="1" selected>Hour</option>
-                      
-                    </select>
-                    <select class="form-select p-2 border rounded-md" aria-label="Minute" id="minuteSelect">
-                      <!-- Minutes -->
-                      <option value="30" selected>Minute</option>
-                      
-                    </select>
-                    <select class="form-select p-2 border rounded-md" aria-label="AM/PM" id="ampmSelect">
-                      <option value="am" selected>AM</option>
-                      <option value="pm">PM</option>
-                    </select>
-                  </div>
-                </div>
-        
-                <div class="mb-4">
-                  <label class="block text-gray-700 font-medium mb-1">Timezone</label>
-                  <select class="form-select p-2 w-full border rounded-md" id="timezoneSelect">
-                    <!-- Timezones -->
-                    <option value="UTC-08:00" selected>(UTC-08:00) America/Los Angeles</option>
-                    
-                  </select>
-                </div>
-        
-                <button id="calculateButton" class="w-full bg-purple-600 text-white font-medium py-2 rounded-md">Calculate</button>
-              </div>
+      <div class="age-calculator-container">
+        <div class="age-calculator-wrapper">
+            <div class="result-container">
+                <h2 class="result-title">Your age is</h2>
+                <p class="result-text" id="age">0 years 0 months 0 days</p>
+                <p class="result-text" id="time">0 hours and 0 minutes</p>
+                <p class="result-info-title">You were born in</p>
+                <p class="result-text" id="date">0:00am on 0 0
+                    0
+                    0000
+                </p>
+                <p class="result-info-title">Next Birthday in</p>
+                <p class="result-text" id="birthday">0 days 0 hours and 0
+                    minutes
+                </p>
+                <p class="result-info-title">Your age is total</p>
+                <p class="result-text" id="total">0 days</p>
             </div>
-          </div>
+            <div class="age-calculator-form">
+                <div class="mb-4">
+                    <label class="form-label">Birthday</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <select class="fi-form-select" aria-label="Day" name="days" id="daySelect" required>
+                            <!-- Days -->
+                            <option value="" selected disabled>Day</option>
+
+                        </select>
+                        <select class="fi-form-select" aria-label="Month" id="monthSelect" required>
+                            <!-- Months -->
+                            <option disabled selected value="">Month</option>
+
+                        </select>
+                        <select class="fi-form-select" aria-label="Year" id="yearSelect" required>
+                            <!-- Years -->
+                            <option disabled selected>Year</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Birth Time (optional)</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <select class="fi-form-select" aria-label="Hour" id="hourSelect">
+                            <!-- Hours -->
+                            <option value="1" selected>Hour</option>
+
+                        </select>
+                        <select class="fi-form-select" aria-label="Minute" id="minuteSelect">
+                            <!-- Minutes -->
+                            <option value="30" selected>Minute</option>
+
+                        </select>
+                        <select class="fi-form-select" aria-label="AM/PM" id="ampmSelect">
+                            <option value="am" selected>AM</option>
+                            <option value="pm">PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label">Age at the Date of</label>
+                  <div class="grid grid-cols-3 gap-2">
+                      <select class="fi-form-select" aria-label="Day" id="toDaySelect">
+                          <!-- Days -->
+
+                      </select>
+                      <select class="fi-form-select" aria-label="Month" id="toMonthSelect">
+                          <!-- Months -->
+
+                      </select>
+                      <select class="fi-form-select" aria-label="Year" id="toYearSelect">
+                          <!-- Years -->
+
+                      </select>
+                  </div>
+              </div>
+
+                <button id="calculateButton" class="btn btn-primary w-full">Calculate</button>
+            </div>
+        </div>
+    </div>
     </main>
  <script src="script.js"></script>
 </body>
